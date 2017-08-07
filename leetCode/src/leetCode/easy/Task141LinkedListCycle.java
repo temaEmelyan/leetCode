@@ -1,4 +1,4 @@
-package easy;
+package leetCode.easy;
 
 class ListNode {
     int val;
