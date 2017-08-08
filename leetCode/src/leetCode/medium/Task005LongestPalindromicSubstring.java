@@ -19,8 +19,56 @@ Output: "bb"*/
 public class Task005LongestPalindromicSubstring {
 
     public static void main(String[] args) {
-        System.out.println(longestPalindromeBruteForce("abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa"));
+        System.out.println(longestPalindrome("ccc"));
 
+    }
+
+
+
+
+
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() <= 1) {
+            return s;
+        }
+
+        int length = 1, centreOfThePalyndrome = 1, longestSoFar = 1;
+
+        for (int posOfCentre = 1; posOfCentre < s.length() - 1; posOfCentre++) {
+            while (posOfCentre - length >= 0 && posOfCentre + length < s.length()) {
+                if (s.charAt(posOfCentre - length) == s.charAt(posOfCentre + length)) {
+                    if (length * 2 + 1 > longestSoFar) {
+                        longestSoFar = length * 2 + 1;
+                        centreOfThePalyndrome = posOfCentre;
+                    }
+                } else {
+                    break;
+                }
+                length++;
+            }
+            length = 1;
+        }
+
+        for (int posOfCentre = 1; posOfCentre <= s.length() - 1; posOfCentre++) {
+            while (posOfCentre - length >= 0 && posOfCentre + length - 1 <= s.length() - 1) {
+                if (s.charAt(posOfCentre - length) == s.charAt(posOfCentre + length - 1)) {
+                    if (length * 2 > longestSoFar) {
+                        longestSoFar = length * 2;
+                        centreOfThePalyndrome = posOfCentre;
+                    }
+                } else {
+                    break;
+                }
+                length++;
+            }
+            length = 1;
+        }
+
+        if (longestSoFar % 2 == 0) {
+            return s.substring(centreOfThePalyndrome - longestSoFar / 2, centreOfThePalyndrome + longestSoFar / 2);
+        } else {
+            return s.substring(centreOfThePalyndrome - longestSoFar / 2, centreOfThePalyndrome + longestSoFar / 2 + 1);
+        }
     }
 
     private static String longestPalindromeBruteForce(String s) {
