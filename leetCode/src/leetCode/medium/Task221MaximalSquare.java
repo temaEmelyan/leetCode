@@ -20,5 +20,6 @@ public class Task221MaximalSquare {
 
     public static int maximalSquare(char[][] matrix) {
         //TODO solve with dp
+        return 0;
     }
 }
